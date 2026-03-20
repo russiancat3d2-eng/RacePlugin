@@ -584,7 +584,7 @@ public class GameManager {
         // them vulnerable so it's not an instant get-out-of-death-free card).
         // Uses MAX_HEALTH (renamed from GENERIC_MAX_HEALTH in Paper 1.21.4+).
         double maxHp = Objects.requireNonNull(
-                revived.getAttribute(org.bukkit.attribute.Attribute.MAX_HEALTH)
+                revived.getAttribute(org.bukkit.attribute.Attribute.GENERIC_MAX_HEALTH)
         ).getValue();
         revived.setHealth(Math.min(10.0, maxHp));
         revived.setFoodLevel(10);
