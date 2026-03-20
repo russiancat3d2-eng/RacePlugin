@@ -1,0 +1,23 @@
+name: TeamDragonRace
+version: ${project.version}
+main: com.example.teamdragonrace.TeamDragonRace
+api-version: '1.21'   # accepts 1.21.x servers including 1.21.11
+description: >
+  Two teams race to slay the Ender Dragon while hunting each other.
+  Features compass tracking, spectator death, and Revival Heart crafting.
+authors:
+  - YourName
+
+commands:
+  race:
+    description: Main command for Team Dragon Race
+    usage: /race <join|start|stop|info>
+    aliases: [tdr]
+
+permissions:
+  teamdragonrace.use:
+    description: Allows players to join teams.
+    default: true
+  teamdragonrace.admin:
+    description: Allows starting/stopping the game.
+    default: op
