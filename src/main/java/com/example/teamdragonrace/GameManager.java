@@ -37,19 +37,25 @@ public class GameManager {
         this.revivalHeartKey = new NamespacedKey(plugin, "revival_heart");
     }
 
-    // --- HELPER METHODS (Required by other files) ---
+    // --- STATIC HELPER METHODS (Fixes the "static context" errors) ---
+    public static String teamName(int team) { 
+        return team == TEAM_1 ? "Team 1" : "Team 2"; 
+    }
+    
+    public static NamedTextColor teamColor(int team) { 
+        return team == TEAM_1 ? NamedTextColor.BLUE : NamedTextColor.RED; 
+    }
+    
+    public static Component msg(String text, NamedTextColor color) {
+        return Component.text(text).color(color);
+    }
+
+    // --- INSTANCE METHODS ---
     public boolean isRunning() { return gameRunning; }
     public boolean isInGame(Player p) { return playerTeams.containsKey(p.getUniqueId()); }
     public boolean isDead(UUID uuid) { return deadPlayers.contains(uuid); }
     public int getTeam(Player p) { return playerTeams.getOrDefault(p.getUniqueId(), 0); }
-    public String teamName(int team) { return team == TEAM_1 ? "Team 1" : "Team 2"; }
-    public NamedTextColor teamColor(int team) { return team == TEAM_1 ? NamedTextColor.BLUE : NamedTextColor.RED; }
-    
-    public Component msg(String text, NamedTextColor color) {
-        return Component.text(text).color(color);
-    }
 
-    // --- CORE LOGIC ---
     public void registerRevivalRecipe() {
         ItemStack heart = createRevivalHeart();
         ShapedRecipe recipe = new ShapedRecipe(revivalHeartKey, heart);
@@ -155,7 +161,7 @@ public class GameManager {
     }
 
     public boolean shouldBlockSpectatorTeleport(Player spectator, Location destination) {
-        return false; // Default allowed for now
+        return false;
     }
 
     public void useRevivalHeart(Player user, ItemStack heartItem) {
@@ -176,9 +182,7 @@ public class GameManager {
         stopGame();
     }
 
-    public void checkTeamElimination() {
-        // Simple logic for win check
-    }
+    public void checkTeamElimination() {}
 
     public List<UUID> getTeamPlayers(int team) {
         return playerTeams.entrySet().stream().filter(e -> e.getValue() == team).map(Map.Entry::getKey).collect(Collectors.toList());
