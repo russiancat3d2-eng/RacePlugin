@@ -1,0 +1,7 @@
+name: TeamDragonRace
+version: 1.0
+main: com.example.teamdragonrace.TeamDragonRace
+api-version: '1.21'
+commands:
+  race:
+    description: Main command for Team Dragon Race
